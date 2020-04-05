@@ -1,0 +1,56 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Juan Pablo de la Vega" />
+  <meta name="viewport" content="width=device-width">
+  <title>Universo</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div id="info">presiona "r" o doble tap para generar nuevos universos <br />
+  	press "r" or dobule-tap to generate new universes</div> -->
+  <style>
+  	#info {position:absolute; top:5px; width:100%; color:#ffffff; padding: 5px; font-family:monospace; font-size:13px; text-align:left; z-index: 1000}
+  </style>
+  <div id="container"></div>
+  <script src="js/three.min.js"></script>
+  <script type="x-shader/x-vertex" id="vertexshader">
+
+    attribute float size;
+    attribute vec3 color;
+    varying vec3 vColor;
+
+    void main() {
+    	
+    		vColor = color;
+
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+        gl_PointSize = size; // use alpha to vary point size, instead
+
+        gl_Position = projectionMatrix * mvPosition;
+
+    }
+
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentshader">
+
+    varying vec3 vColor;
+
+    void main() {
+
+        gl_FragColor = vec4( vColor, 1.0 );
+
+    }
+
+</script>
+  <script src= "js/unibuff.js"></script>
+  
+</body>
+</html>
